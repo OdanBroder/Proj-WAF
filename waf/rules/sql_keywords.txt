@@ -1,0 +1,17 @@
+union
+select
+insert
+delete
+drop
+update
+exec
+execute
+script
+javascript
+declare
+cast
+table
+database
+create
+alter
+truncate

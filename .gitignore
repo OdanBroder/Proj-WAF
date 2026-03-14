@@ -1,0 +1,14 @@
+logs/
+*.log
+.DS_Store
+.env.local
+node_modules/
+__pycache__/
+.pytest_cache/
+*.pyc
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+docker compose.override.yml

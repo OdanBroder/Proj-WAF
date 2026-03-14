@@ -1,0 +1,14 @@
+script
+javascript
+onerror
+onload
+onclick
+onmouseover
+onkeypress
+alert
+confirm
+prompt
+eval
+function
+constructor
+prototype

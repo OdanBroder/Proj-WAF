@@ -1,0 +1,274 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║             Web Application Firewall (WAF) Lab - START HERE                ║
+║                                                                            ║
+║                  ModSecurity + OWASP Top 10 Protection Lab                 ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+Welcome! You have just downloaded a complete, production-ready WAF lab for
+learning Web Application Firewall concepts through hands-on testing.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 WHAT IS THIS?
+
+This is a complete Docker-based lab environment with:
+  ✓ Nginx + ModSecurity WAF
+  ✓ DVWA (Damn Vulnerable Web Application)
+  ✓ MySQL Database
+  ✓ 5 Attack Simulation Scripts
+  ✓ 30+ ModSecurity Detection Rules
+  ✓ 80+ Security Test Payloads
+  ✓ Complete Documentation (6 guides)
+  ✓ Automated Setup Scripts
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚡ QUICK START (5 minutes)
+
+1. Install Docker Desktop
+   ├─ Windows/Mac: https://docker.com/products/docker-desktop
+   └─ Linux: Follow Docker installation guide
+
+2. Navigate to this project directory
+   └─ cd /path/to/waf-lab
+
+3. Start the lab
+   ├─ With Bash/WSL:     docker compose up --build
+   └─ With PowerShell:   docker compose up --build
+
+4. Wait for startup (2-3 minutes) - Watch for:
+   ├─ "waf-lab-mysql | ready for connections"
+   ├─ "waf-lab-dvwa | Apache/2.4.X started"
+   └─ "waf-lab-waf | nginx: master process started"
+
+5. Test it works
+   ├─ Browser:          http://localhost
+   └─ Terminal:         curl http://localhost
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 DOCUMENTATION FILES (Read in this order)
+
+1. README.md ..................... Main overview & quick start (5 min)
+2. TESTING.md .................... Detailed testing guide (30 min)
+3. MANIFEST.md ................... Complete file listing (10 min)
+4. QUICK-REFERENCE.sh ............ Command cheat sheet (2 min)
+5. WINDOWS-SETUP.md .............. Windows-specific guide (10 min)
+6. DEPLOYMENT.md ................. Production considerations (15 min)
+
+CHOOSE YOUR PATH:
+
+[A] First time + Windows
+    1. WINDOWS-SETUP.md
+    2. README.md
+    3. TESTING.md
+
+[B] First time + Mac/Linux
+    1. README.md
+    2. TESTING.md
+    3. QUICK-REFERENCE.sh
+
+[C] Complete understanding
+    1. README.md
+    2. INDEX.md
+    3. MANIFEST.md
+    4. TESTING.md
+    5. DEPLOYMENT.md
+
+[D] University assignment
+    README.md → TESTING.md → MANIFEST.md → Run tests → Document
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 YOUR FIRST TEST (30 seconds)
+
+After the lab starts, run this in a new terminal:
+
+# Test SQL Injection Attack
+curl -i "http://localhost/vulnerabilities/sqli/?id=' OR '1'='1"
+
+Expected result:
+HTTP/1.1 403 Forbidden
+
+This means the WAF is working! The malicous request was blocked.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📂 PROJECT STRUCTURE
+
+waf-lab/
+├── docker compose.yml          ← Master orchestration file
+├── README.md                   ← START HERE!
+│
+├── waf/                        ← WAF Configuration
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   ├── modsecurity.conf
+│   └── rules/custom_rules.conf ← Detection rules (30+ rules)
+│
+├── dvwa/                       ← Vulnerable Application
+│   └── Dockerfile
+│
+├── attack-scripts/             ← Attack Simulations (5 scripts)
+│   ├── sql_injection.sh
+│   ├── xss_test.sh
+│   ├── command_injection.sh
+│   ├── lfi_test.sh
+│   └── brute_force.sh
+│
+├── test-payloads/              ← Reference Payloads (80+)
+│   ├── sql.txt
+│   ├── xss.txt
+│   ├── lfi.txt
+│   └── cmd.txt
+│
+└── Utility Scripts
+    ├── quick-start.sh          ← Automated setup
+    ├── view-logs.sh            ← View attack logs
+    └── clean-all.sh            ← Reset everything
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 WHAT YOU'LL LEARN
+
+✓ Web Application Firewall concepts
+✓ ModSecurity rule writing
+✓ OWASP Top 10 attack patterns
+✓ Attack simulation techniques
+✓ Security logging and analysis
+✓ Docker containerization
+✓ Infrastructure as Code
+✓ Threat detection mechanisms
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔐 ATTACKS YOU'LL TEST
+
+1. SQL Injection
+   └─ Payloads: ' OR '1'='1, UNION SELECT, etc.
+
+2. Cross-Site Scripting (XSS)
+   └─ Payloads: <script>alert(1)</script>, onerror=, etc.
+
+3. Command Injection
+   └─ Payloads: ; ls, | whoami, $(id), etc.
+
+4. Local File Inclusion (LFI)
+   └─ Payloads: ../../../../etc/passwd, %00 null bytes, etc.
+
+5. Brute Force
+   └─ Simulates 15 failed login attempts, WAF blocks at #11
+
+All attacks are blocked by the WAF → HTTP 403 Forbidden ✓
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🛠️ SYSTEM REQUIREMENTS
+
+Minimum:
+  • Docker Desktop installed
+  • 2GB RAM available
+  • 5GB free disk space
+  • 10 minutes setup time
+
+Recommended:
+  • 4GB RAM allocated to Docker
+  • 10GB free disk space
+  • Windows 10 21H2+ / Mac Catalina+ / Ubuntu 20.04+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⏱️ TIME ESTIMATE
+
+Setup (first time):      10 minutes
+Basic testing:           5 minutes
+Complete assignment:     2-3 hours
+Deep learning:           4-6 hours
+Advanced exercises:      8+ hours
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  IMPORTANT NOTES
+
+1. This is an educational lab with INTENTIONALLY VULNERABLE applications
+2. DVWA is designed to be hackable for learning purposes
+3. Only run this on isolated networks
+4. Do NOT deploy DVWA to the internet
+5. Keep Docker containers private (not exposed to WAN)
+6. All traffic is logged for analysis
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 CHECKING FOR PROBLEMS
+
+Issue: Docker not found
+Fix:   Install Docker Desktop from https://docker.com
+
+Issue: Port 80 already in use
+Fix:   See WINDOWS-SETUP.md or TESTING.md troubleshooting section
+
+Issue: Services won't start
+Fix:   Run: docker compose down -v
+       Then: docker compose up --build
+
+Issue: Can't connect to localhost
+Fix:   Wait 60 seconds for MySQL startup
+       Check: docker compose ps (all should show "Up")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📞 HELP & SUPPORT
+
+General help:        See README.md section "Troubleshooting"
+Windows problems:    Read WINDOWS-SETUP.md
+Testing issues:      Check TESTING.md troubleshooting
+All files:           View MANIFEST.md
+Quick reference:     Run ./QUICK-REFERENCE.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ READINESS CHECKLIST
+
+Before you start:
+- [ ] Docker Desktop installed
+- [ ] Project files extracted to local folder
+- [ ] You have this START-HERE.txt file open
+- [ ] You can open a terminal in the project directory
+
+You're ready! Next step:
+→ Open README.md
+→ Run: docker compose up --build
+→ Open another terminal
+→ Run: ./attack-scripts/sql_injection.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 YOU'RE ALL SET!
+
+This complete lab is ready to use. Everything you need is included:
+✓ 30+ detection rules
+✓ 5 attack simulation scripts
+✓ 80+ payload examples
+✓ 6 comprehensive guides
+✓ Full Docker infrastructure
+✓ Automated logging
+
+Total time to understand everything: 2-4 hours
+
+NEXT ACTION:
+→ Open README.md in your text editor
+→ Follow the Quick Start section
+
+Questions? Check MANIFEST.md for a file guide or TESTING.md for procedures.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Version: 1.0
+Status: ✅ Complete & Production Ready
+Last Updated: 2024
+
+Happy Learning! 🚀
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

