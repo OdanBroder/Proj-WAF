@@ -11,7 +11,7 @@ echo "Brute Force Attack Test"
 echo "=========================================="
 echo ""
 
-TARGET="http://localhost"
+TARGET="http://localhost:8080:8080"
 USERNAME="admin"
 ATTEMPT_COUNT=15
 

@@ -11,7 +11,7 @@ echo "Command Injection Attack Test"
 echo "=========================================="
 echo ""
 
-TARGET="http://localhost"
+TARGET="http://localhost:8080"
 
 echo "[*] Testing command injection payloads..."
 echo ""

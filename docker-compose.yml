@@ -1,21 +1,38 @@
 version: '3.8'
 
 services:
+  # MySQL Database for DVWA
+  mysql:
+    image: mysql:5.7
+    container_name: waf-lab-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dvwa
+      MYSQL_USER: dvwa
+      MYSQL_PASSWORD: dvwa123
+    networks:
+      - waf-lab-network
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
+
   # DVWA - Vulnerable Web Application
   dvwa:
     build:
       context: ./dvwa
       dockerfile: Dockerfile
     container_name: waf-lab-dvwa
-    # For test dvwa running, uncomment when comment waf
-    # ports:
-    #   - "80:80"
-    #   - "443:443"
     environment:
       DB_SERVER: mysql
       DB_USER: dvwa
       DB_PASSWORD: dvwa123
       DB_DATABASE: dvwa
+    # depends_on:
+    #   mysql:
+    #     condition: service_healthy
     networks:
       - waf-lab-network
     expose:
@@ -28,17 +45,18 @@ services:
       dockerfile: Dockerfile
     container_name: waf-lab-waf
     ports:
-      - "80:80"
+      - "8080:80"
       - "443:443"
     volumes:
       - ./logs/modsecurity:/var/log/modsecurity
       - ./logs/nginx:/var/log/nginx
     depends_on:
-      - dvwa
+      dvwa:
+        condition: service_started
     networks:
       - waf-lab-network
     healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost/nginx-health || exit 1"]
+      test: ["CMD-SHELL", "curl -sf http://localhost:8080/nginx-health || exit 1"]
       timeout: 3s
       retries: 2
       interval: 10s

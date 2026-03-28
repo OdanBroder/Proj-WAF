@@ -11,7 +11,7 @@ echo "SQL Injection Attack Test"
 echo "=========================================="
 echo ""
 
-TARGET="http://localhost"
+TARGET="http://localhost:8080"
 
 echo "[*] Testing basic SQL Injection payload..."
 echo "[*] Payload: ' OR '1'='1"

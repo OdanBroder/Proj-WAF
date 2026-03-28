@@ -11,7 +11,7 @@ echo "Cross-Site Scripting (XSS) Attack Test"
 echo "=========================================="
 echo ""
 
-TARGET="http://localhost"
+TARGET="http://localhost:8080"
 
 echo "[*] Testing XSS payloads..."
 echo ""

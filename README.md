@@ -131,6 +131,18 @@ Open a new terminal in the project directory:
 ```
 **Expected:** 403/429 after ~10 failed attempts (rate limiting)
 
+### Bot Detection Test
+```bash
+./attack-scripts/bot_detection.sh
+```
+**Expected:** 403 Forbidden for known automated User-Agent signatures
+
+### Slow DDoS Test
+```bash
+./attack-scripts/slow_ddos.sh
+```
+**Expected:** 429 Too Many Requests after repeated DVWA endpoint floods
+
 ---
 
 ## 📊 Viewing WAF Logs

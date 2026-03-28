@@ -56,6 +56,8 @@ echo "./attack-scripts/xss_test.sh               # Test XSS"
 echo "./attack-scripts/command_injection.sh      # Test command injection"
 echo "./attack-scripts/lfi_test.sh               # Test LFI"
 echo "./attack-scripts/brute_force.sh            # Test brute force"
+echo "./attack-scripts/bot_detection.sh          # Test bot detection"
+echo "./attack-scripts/slow_ddos.sh              # Test slow DDoS detection"
 echo ""
 
 # Analysis Commands
